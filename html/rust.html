@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>WebSocket Test</title>
+</head>
+
+<body>
+    <script>
+        const ws = new WebSocket("ws://localhost:8080/");
+        let startTime;
+        ws.onopen = () => {
+            console.log("WebSocket connection established");
+        };
+        ws.onclose = () => {
+            console.log("WebSocket connection closed");
+        };
+        ws.onmessage = (e) => {
+            messageHandler(e);
+        };
+        const sendHello = () => {
+            startTime = performance.now();
+            ws.send("Hello World!");
+        };
+        function messageHandler(message) {
+            var endTime = performance.now();
+            if (typeof message.data === 'string') {  
+                console.log(`Received string: ${message.data} in ${endTime - startTime}ms`);
+            } else if (message.data instanceof Blob) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const arrayBuffer = e.target.result;
+                    console.log(`Received file with size: ${arrayBuffer.byteLength} bytes in ${endTime - startTime}ms`);
+                };
+                reader.readAsArrayBuffer(message.data);
+            }
+        }
+        function sendFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    startTime = performance.now();
+                    ws.send(e.target.result);
+                };
+                reader.readAsArrayBuffer(file);
+            }
+        }
+        console.log = function (message) {
+            const textarea = document.getElementById('consolelog');
+            textarea.value += message + '\n';
+            if(textarea.selectionStart == textarea.selectionEnd) {
+                textarea.scrollTop = textarea.scrollHeight;
+            }
+        };
+    </script>
+    <h1>WebSocket Test</h1>
+    <textarea style="width:100%;" rows="5" id="consolelog" readonly></textarea>
+    <hr>
+    <p>String Test:</p>
+    <button onclick="sendHello()">Hello World!</button>
+    <br>
+    <p>Bianry Test:</p>
+    <input type="file" id="fileInput" />
+    <p></p>
+    <button onclick="sendFile()">Send File</button>
+</body>
+
+</html>

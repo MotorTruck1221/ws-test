@@ -1,0 +1,6 @@
+[submodule "Rust-server"]
+	path = Rust-server
+	url = https://github.com/ethanaobrien/Rust-server
+[submodule "ws-bun-test"]
+	path = ws-bun-test
+	url = https://github.com/allancoding/ws-bun-test
