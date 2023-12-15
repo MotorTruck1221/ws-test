@@ -6,8 +6,10 @@ import path from 'path';
 const __dirname = path.resolve();
 const rustServerPath = path.join(__dirname, 'Rust-server');
 const bunServerPath = path.join(__dirname, 'ws-bun-test');
+const goServerPath = path.join(__dirname, 'go-test');
 import rustTest from './tests/rust.js';
 import bunTest from './tests/bun.js';
+import goTest from './tests/go.js';
 
 async function testRust() {
     //copy ./html/rust.html to ./Rust-server/ asyncronously
@@ -47,9 +49,22 @@ async function testBun() {
     return;
 }
 
+async function testGo() {
+    const p = exec('go run main.go', { cwd: goServerPath }, (err, stdout, stderr) => {
+        console.log(stdout);
+    });
+    console.log("go-server started at: http://localhost:3001/");
+    await goTest();
+    p.kill('SIGINT');
+    console.log("go-server stopped");
+    return;
+}
+
 async function startAll() {
     await testRust();
     await testBun();
+    await testGo();
+    process.exit(0);
 }
 
 startAll();
