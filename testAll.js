@@ -33,13 +33,14 @@ async function testBun() {
 }
 
 async function testGo() { 
-    const p = exec('./test', { cwd: goServerPath }, (err, stdout, stderr) => {
-        console.log(stdout);
+    const p = exec('./test', { cwd: goServerPath });
+    p.stdout.on('data', (data) => {
+        console.log(data);
     });
-    console.log("go-server started at: http://localhost:3001/");
+    console.log("go-test started at: http://localhost:3001/");
     await goTest();
     p.kill('SIGINT');
-    console.log("go-server stopped");
+    console.log("go-test stopped");
     return;
 }
 

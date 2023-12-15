@@ -7,7 +7,6 @@ import (
     "html/template"
     "github.com/gorilla/websocket"
     "log"
-    "io"
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
@@ -21,6 +20,12 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
+type messagePayload struct {
+	MessageType int
+	Message     []byte
+	IsBinary    bool // New field to indicate if the message is binary
+}
+
 func handleConnection(w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
@@ -29,46 +34,76 @@ func handleConnection(w http.ResponseWriter, r *http.Request) {
 	}
 	defer conn.Close()
 
+	// Create a buffered channel to communicate between handleConnection and writeMessage
+	messageChannel := make(chan messagePayload, 10) // Adjust the buffer size based on your needs
+
+	// Start the writeMessage goroutine
+	go writeMessage(conn, messageChannel)
+
+	errorChannel := make(chan error)
+	go handleErrors(conn, errorChannel)
+
 	for {
-		messageType, reader, err := conn.NextReader()
+		messageType, p, err := conn.ReadMessage()
 		if err != nil {
-			log.Println(err)
+			errorChannel <- err
 			return
 		}
 
-		if messageType == websocket.BinaryMessage {
-			go handleFile(conn, reader)
-		} else if messageType == websocket.TextMessage {
-			go handleText(conn, reader)
+		// Determine if the message is binary or text
+		isBinary := messageType == websocket.BinaryMessage
+
+		// Send the received message to the writeMessage goroutine
+		messageChannel <- messagePayload{MessageType: messageType, Message: p, IsBinary: isBinary}
+	}
+}
+
+func writeMessage(conn *websocket.Conn, messageChannel <-chan messagePayload) {
+	defer conn.Close()
+
+	// Reuse the response slice
+	response := make([]byte, 0, 256)
+
+	for {
+		// Wait for a message from the channel
+		payload, ok := <-messageChannel
+		if !ok {
+			return
+		}
+
+		// Process the received message (you can add your logic here)
+		if payload.IsBinary {
+			fmt.Println("Received binary message")
+			// Handle binary message logic
+		} else {
+			fmt.Printf("Received text message: %s\n", payload.Message)
+			// Handle text message logic
+		}
+
+		// Update the response content
+		response = append(response[:0], "Server response: "...)
+		response = append(response, payload.Message...)
+
+		// Check if the connection is still open before writing
+		err := conn.WriteMessage(payload.MessageType, response)
+		if err != nil {
+			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
+				log.Printf("Error writing message: %v", err)
+			}
+			return
 		}
 	}
 }
 
-func handleFile(conn *websocket.Conn, reader io.Reader) {
-	// Read the file data
-	data, err := io.ReadAll(reader)
-	if err != nil {
-		log.Println("Error reading file data:", err)
-		return
-	}
+func handleErrors(conn *websocket.Conn, errorChannel <-chan error) {
+	for {
+		err, ok := <-errorChannel
+		if !ok {
+			return
+		}
 
-	// Echo the file data back as binary message
-	if err := conn.WriteMessage(websocket.BinaryMessage, data); err != nil {
-		log.Println("Error echoing file data:", err)
-	}
-}
-
-func handleText(conn *websocket.Conn, reader io.Reader) {
-	// Read the text data
-	data, err := io.ReadAll(reader)
-	if err != nil {
-		log.Println("Error reading text data:", err)
-		return
-	}
-
-	// Echo the text data back as text message
-	if err := conn.WriteMessage(websocket.TextMessage, data); err != nil {
-		log.Println("Error echoing text data:", err)
+		log.Printf("Error: %v", err)
+		conn.Close()
 	}
 }
 
