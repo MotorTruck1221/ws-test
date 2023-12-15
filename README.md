@@ -3,15 +3,29 @@
 
 ## Results:
 
+| Language | Time (ms, avg) | Time (ms, max) | Time (ms, min) | Browser | WS Type |
+|----------|-----------------|----------------|----------------|---------|---------|
+| Rust     | 0.000           | 0.000          | 0.000          | Chrome  | Message |
+| Rust     | 0.000           | 0.000          | 0.000          | Chrome  | Binary  |
+| Rust     | 0.000           | 0.000          | 0.000          | Firefox | Message |
+| Rust     | 0.000           | 0.000          | 0.000          | Firefox | Binary  |
+| Go       | 0.000           | 0.000          | 0.000          | Chrome  | Message |
+| Go       | 0.000           | 0.000          | 0.000          | Chrome  | Binary  |
+| Go       | 0.000           | 0.000          | 0.000          | Firefox | Message |
+| Go       | 0.000           | 0.000          | 0.000          | Firefox | Binary  |
+| Node.JS  | 0.000           | 0.000          | 0.000          | Chrome  | Message |
+| Node.JS  | 0.000           | 0.000          | 0.000          | Chrome  | Binary  |
+| Node.JS  | 0.000           | 0.000          | 0.000          | Firefox | Message |
+| Node.JS  | 0.000           | 0.000          | 0.000          | Firefox | Binary  |
+| Python   | 0.000           | 0.000          | 0.000          | Chrome  | Message |
+| Python   | 0.000           | 0.000          | 0.000          | Chrome  | Binary  |
+| Python   | 0.000           | 0.000          | 0.000          | Firefox | Message |
+| Python   | 0.000           | 0.000          | 0.000          | Firefox | Binary  |
+| Bun      | 0.000           | 0.000          | 0.000          | Chrome  | Message |
+| Bun      | 0.000           | 0.000          | 0.000          | Chrome  | Binary  |
+| Bun      | 0.000           | 0.000          | 0.000          | Firefox | Message |
+| Bun      | 0.000           | 0.000          | 0.000          | Firefox | Binary  |
 
-
-| Language | Time (ms, avg) | Time (ms, max) | Time (ms, min) |
-|----------|----------------|----------------|----------------|
-| Rust     | 0.000          | 0.000          | 0.000          |
-| Go       | 0.000          | 0.000          | 0.000          |
-| Node.JS  | 0.000          | 0.000          | 0.000          |
-| Python   | 0.000          | 0.000          | 0.000          |
-| Bun      | 0.000          | 0.000          | 0.000          |
 
 
 ## Local Testing:
