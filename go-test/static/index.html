@@ -6,7 +6,7 @@
 
 <body>
     <script>
-        const ws = new WebSocket("ws://localhost:3001/");
+        const ws = new WebSocket("ws://localhost:3001/ws");
         let startTime;
         ws.onopen = () => {
             console.log("WebSocket connection established");
