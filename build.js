@@ -17,6 +17,7 @@ async function buildRust() {
 }
 
 async function buildGo() {
+    exec('go get', { cwd: goServerPath }, (err, stdout, stderr) => { console.log(stdout) });
     exec('go build -o test', { cwd: goServerPath }, (err, stdout, stderr) => { console.log(stdout) });
     console.log("go-server built");
     return;
@@ -27,6 +28,7 @@ async function buildBun() {
         if (err) throw err;
         console.log('bun.html was copied to ws-bun-test');
     });
+    exec('bun install', { cwd: bunServerPath }, (err, stdout, stderr) => { console.log(stdout) });
     exec('bun build index.ts --outdir build/', { cwd: bunServerPath }, (err, stdout, stderr) => { console.log(stdout) });
     console.log("ws-bun-test built");
     return;
