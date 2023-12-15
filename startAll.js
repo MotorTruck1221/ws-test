@@ -11,6 +11,22 @@ import rustTest from './tests/rust.js';
 import bunTest from './tests/bun.js';
 import goTest from './tests/go.js';
 
+async function compileRust() {
+    await exec('cargo build --release', { cwd: rustServerPath }, (err, stdout, stderr) => {
+        console.log(stdout);
+    });
+    console.log("Rust-server compiled");
+    return;
+}
+
+async function compileGo() {
+    await exec('go build -o test', { cwd: goServerPath }, (err, stdout, stderr) => {
+        console.log(stdout);
+    });
+    console.log("go-server compiled");
+    return;
+}
+
 async function testRust() {
     //copy ./html/rust.html to ./Rust-server/ asyncronously
     await fs.copyFile(path.join(__dirname, 'html', 'rust.html'), path.join(rustServerPath, 'rust.html'), (err) => {
@@ -18,7 +34,7 @@ async function testRust() {
         console.log('rust.html was copied to Rust-server');
     });
     //start Rust-server
-    const p = exec('cargo run', { cwd: rustServerPath }, (err, stdout, stderr) => {
+    const p = exec('./target/release/server', { cwd: rustServerPath }, (err, stdout, stderr) => {
         console.log(stdout);
     });
     console.log("Rust-server started at: http://localhost:8000/rust.html");
@@ -49,8 +65,8 @@ async function testBun() {
     return;
 }
 
-async function testGo() {
-    const p = exec('go run main.go', { cwd: goServerPath }, (err, stdout, stderr) => {
+async function testGo() { 
+    const p = exec('./test', { cwd: goServerPath }, (err, stdout, stderr) => {
         console.log(stdout);
     });
     console.log("go-server started at: http://localhost:3001/");
@@ -61,6 +77,8 @@ async function testGo() {
 }
 
 async function startAll() {
+    await compileRust();
+    await compileGo();
     await testRust();
     await testBun();
     await testGo();
