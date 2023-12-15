@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+      "test": "node testAll.js",
+      "build": "node build.js",
+      "setup": "playwright install && pnpm build"
+    },
   "keywords": [],
   "author": "",
   "license": "ISC",
