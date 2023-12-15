@@ -23,11 +23,14 @@ async function goTest() {
     await page2.screenshot({path: `test-screenshots/go-ff-basic.png`});
     console.log('Go screenshot (firefox, basic) taken');
     await fox.close();
+    
+    await new Promise(r => setTimeout(r, 5000));
 
     const chrome2 = await chromium.launch({headless: false});
     const context3 = await chrome2.newContext();
     const page3 = await context3.newPage();
     await page3.goto('http://localhost:3001/');
+    await new Promise(r => setTimeout(r, 5000));
     for (let i = 0; i < 10; i++) {
         await page3.click('#sendFile');
     }
@@ -39,6 +42,7 @@ async function goTest() {
     const context4 = await fox2.newContext();
     const page4 = await context4.newPage();
     await page4.goto('http://localhost:3001/');
+    await new Promise(r => setTimeout(r, 5000));
     for (let i = 0; i < 10; i++) {
         await page4.click('#sendFile');
     }
