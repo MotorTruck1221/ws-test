@@ -15,8 +15,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 var upgrader = websocket.Upgrader{
-	ReadBufferSize:  3072,
-	WriteBufferSize: 3072,
 	CheckOrigin: func(r *http.Request) bool {
 		return true
 	},
@@ -79,7 +77,6 @@ func writeMessage(conn *websocket.Conn, messageChannel <-chan messagePayload) {
 		}
 	}
 }
-
 
 // go routine to handle websocket connections
 func StartServer() {
