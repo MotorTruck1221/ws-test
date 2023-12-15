@@ -46,6 +46,7 @@ async function bunTest() {
     }
     await page4.screenshot({path: `test-screenshots/bun-ff-binary.png`});
     console.log('Bun screenshot (firefox, binary) taken');
+    await fox2.close();
 }
 
 
