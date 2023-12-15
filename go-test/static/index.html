@@ -6,7 +6,7 @@
 
 <body>
     <script>
-        const ws = new WebSocket("ws://localhost:3001/ws");
+        const ws = new WebSocket("ws://localhost:3001/");
         let startTime;
         ws.onopen = () => {
             console.log("WebSocket connection established");
@@ -58,12 +58,12 @@
     <textarea style="width:100%;" rows="5" id="consolelog" readonly></textarea>
     <hr>
     <p>String Test:</p>
-    <button onclick="sendHello()" id="sendHello" >Send Hello</button>
+    <button onclick="sendHello()" id="sendHello">Send Hello</button>
     <br>
     <p>Bianry Test:</p>
     <input type="file" id="fileInput" />
     <p></p>
-    <button onclick="sendFile()">Send File</button>
+    <button onclick="sendFile()" id="sendFile">Send File</button>
 </body>
 
 </html>

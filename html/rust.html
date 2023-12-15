@@ -6,7 +6,7 @@
 
 <body>
     <script>
-        const ws = new WebSocket("ws://localhost:8080/");
+        const ws = new WebSocket("ws://localhost:8000/");
         let startTime;
         ws.onopen = () => {
             console.log("WebSocket connection established");
@@ -45,6 +45,14 @@
                 };
                 reader.readAsArrayBuffer(file);
             }
+            else {
+                const blob = new Blob([new Uint8Array(1024 * 1024)]);
+                blob.arrayBuffer().then((arrayBuffer) => {
+                    startTime = performance.now();
+                    ws.send(arrayBuffer);
+                });
+                blob.close();
+            }
         }
         console.log = function (message) {
             const textarea = document.getElementById('consolelog');
@@ -58,12 +66,12 @@
     <textarea style="width:100%;" rows="5" id="consolelog" readonly></textarea>
     <hr>
     <p>String Test:</p>
-    <button onclick="sendHello()" id="sendHello">Send Hello</button>
+    <button onclick="sendHello()" id="sendHello" >Send Hello</button>
     <br>
     <p>Bianry Test:</p>
     <input type="file" id="fileInput" />
     <p></p>
-    <button onclick="sendFile()">Send File</button>
+    <button onclick="sendFile()" id="sendFile" >Send File</button>
 </body>
 
 </html>
