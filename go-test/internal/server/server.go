@@ -7,6 +7,7 @@ import (
     "html/template"
     "github.com/gorilla/websocket"
     "log"
+    "io"
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
@@ -20,11 +21,6 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
-type messagePayload struct {
-	MessageType int
-	Message     []byte
-}
-
 func handleConnection(w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
@@ -33,48 +29,46 @@ func handleConnection(w http.ResponseWriter, r *http.Request) {
 	}
 	defer conn.Close()
 
-	// Create a channel to communicate between handleConnection and writeMessage
-	messageChannel := make(chan messagePayload)
-
-	// Start the writeMessage goroutine
-	go writeMessage(conn, messageChannel)
-
 	for {
-		messageType, p, err := conn.ReadMessage()
+		messageType, reader, err := conn.NextReader()
 		if err != nil {
 			log.Println(err)
 			return
 		}
 
-		// Send the received message to the writeMessage goroutine
-		messageChannel <- messagePayload{MessageType: messageType, Message: p}
+		if messageType == websocket.BinaryMessage {
+			go handleFile(conn, reader)
+		} else if messageType == websocket.TextMessage {
+			go handleText(conn, reader)
+		}
 	}
 }
 
-func writeMessage(conn *websocket.Conn, messageChannel <-chan messagePayload) {
-	defer conn.Close()
+func handleFile(conn *websocket.Conn, reader io.Reader) {
+	// Read the file data
+	data, err := io.ReadAll(reader)
+	if err != nil {
+		log.Println("Error reading file data:", err)
+		return
+	}
 
-	for {
-		// Wait for a message from the channel
-		payload, ok := <-messageChannel
-		if !ok {
-			return
-		}
+	// Echo the file data back as binary message
+	if err := conn.WriteMessage(websocket.BinaryMessage, data); err != nil {
+		log.Println("Error echoing file data:", err)
+	}
+}
 
-		// Process the received message (you can add your logic here)
-		fmt.Printf("Received message: %s\n", payload.Message)
+func handleText(conn *websocket.Conn, reader io.Reader) {
+	// Read the text data
+	data, err := io.ReadAll(reader)
+	if err != nil {
+		log.Println("Error reading text data:", err)
+		return
+	}
 
-		// Generate a response
-		response := []byte("Server response: " + string(payload.Message))
-
-		// Check if the connection is still open before writing
-		err := conn.WriteMessage(payload.MessageType, response)
-		if err != nil {
-			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
-				log.Printf("Error writing message: %v", err)
-			}
-			return
-		}
+	// Echo the text data back as text message
+	if err := conn.WriteMessage(websocket.TextMessage, data); err != nil {
+		log.Println("Error echoing text data:", err)
 	}
 }
 
