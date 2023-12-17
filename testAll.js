@@ -7,10 +7,12 @@ const rustServerPath = path.join(__dirname, 'Rust-server');
 const bunServerPath = path.join(__dirname, 'ws-bun-test');
 const goServerPath = path.join(__dirname, 'go-test');
 const nodeServerPath = path.join(__dirname, 'node-test');
+const pythonServerPath = path.join(__dirname, 'python-test');
 import rustTest from './tests/rust.js';
 import bunTest from './tests/bun.js';
 import goTest from './tests/go.js';
 import nodeTest from './tests/node-test.js';
+import pythonTest from './tests/python.js'
 
 async function testRust() {
     const p = exec('./target/release/server', { cwd: rustServerPath }, (err, stdout, stderr) => {
@@ -58,11 +60,28 @@ async function testNode() {
     return;
 }
 
+async function testPython() {
+    const p = exec('python3 main.py', { cwd: pythonServerPath });
+    p.stdout.on('data', (data) => {
+        console.log(data);
+    });
+    console.log("python-test started at: http://localhost:8000/");
+    //wait for hypercorn to start
+    await new Promise(resolve => setTimeout(resolve, 5000));
+
+    await pythonTest();
+    p.kill('SIGINT');
+    console.log("python-test stopped");
+    return;
+}
+
+
 async function startAll() {
     await testRust();
     await testBun();
     await testGo();
     await testNode();
+    await testPython();
     process.exit(0);
 }
 
