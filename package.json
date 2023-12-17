@@ -5,10 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-      "test": "node testAll.js",
-      "build": "node build.js",
-      "setup": "playwright install && pnpm build"
-    },
+    "test": "node testAll.js",
+    "build": "node build.js",
+    "setup": "playwright install && pnpm build"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -16,6 +16,8 @@
     "@types/node": "^20.10.4"
   },
   "dependencies": {
+    "@fastify/cors": "^8.4.2",
+    "fastify": "^4.25.0",
     "playwright": "^1.40.1"
   }
 }

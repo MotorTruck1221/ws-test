@@ -1,7 +1,7 @@
 # A simple Websocket Test between Bun, Rust, Go, Node.JS and Python
 
 
-## Results:
+## Results (from the last 4 runs):
 
 | Language | Time (ms, avg) | Time (ms, max) | Time (ms, min) | Browser | WS Type |
 |----------|-----------------|----------------|----------------|---------|---------|
@@ -64,4 +64,4 @@ pnpm run build
 ```bash
 pnpm run test
 ```
-7. Results will be in [./test-screenshots](./test-screenshots/) and [./test-results.json](./test-results.json)
+7. Results will be in [./test-screenshots](./test-screenshots/)

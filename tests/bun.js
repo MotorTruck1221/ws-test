@@ -5,8 +5,9 @@ const __dirname = path.resolve();
 
 async function bunTest() {
     const chrome = await chromium.launch({headless: false});
-    const context = await chrome.newContext();
-    const page = await context.newPage();
+    const context = await chrome.newContext({
+    });
+    const page = await context.newPage(); 
     await page.goto('http://localhost:3000/');
     for (let i = 0; i < 10; i++) {
         await page.click('#sendHello');
@@ -16,7 +17,8 @@ async function bunTest() {
     await chrome.close();
 
     const fox = await firefox.launch({headless: false});
-    const context2 = await fox.newContext();
+    const context2 = await fox.newContext({
+    });
     const page2 = await context2.newPage();
     await page2.goto('http://localhost:3000/');
     for (let i = 0; i < 10; i++) {
@@ -26,10 +28,10 @@ async function bunTest() {
     console.log('Bun screenshot (firefox, basic) taken');
     await fox.close();
 
-    await new Promise(r => setTimeout(r, 5000));
 
     const chrome2 = await chromium.launch({headless: false});
-    const context3 = await chrome2.newContext();
+    const context3 = await chrome2.newContext({
+    });
     const page3 = await context3.newPage();
     await page3.goto('http://localhost:3000/');
     for (let i = 0; i < 10; i++) {
@@ -40,7 +42,8 @@ async function bunTest() {
     await chrome2.close();
 
     const fox2 = await firefox.launch({headless: false});
-    const context4 = await fox2.newContext();
+    const context4 = await fox2.newContext({
+    });
     const page4 = await context4.newPage();
     await page4.goto('http://localhost:3000/');
     for (let i = 0; i < 10; i++) {
