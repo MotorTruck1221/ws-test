@@ -23,7 +23,6 @@ async function rustTest() {
     console.log('Rust screenshot (firefox, basic) taken');
     await fox.close();
 
-    await new Promise(r => setTimeout(r, 5000));
 
     const chrome2 = await chromium.launch({headless: false});
     const context3 = await chrome2.newContext();

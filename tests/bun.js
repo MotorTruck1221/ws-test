@@ -1,6 +1,4 @@
 import { chromium, firefox } from 'playwright';
-import path from 'path';
-const __dirname = path.resolve();
 
 
 async function bunTest() {
