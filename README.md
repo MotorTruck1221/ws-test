@@ -23,10 +23,13 @@
 | Python   | 0.000           | 0.000          | 0.000          | Chrome  | Binary  |
 | Python   | 0.000           | 0.000          | 0.000          | Firefox | Message |
 | Python   | 0.000           | 0.000          | 0.000          | Firefox | Binary  |
-| Bun      | 0.000           | 0.000          | 0.000          | Chrome  | Message |
-| Bun      | 0.000           | 0.000          | 0.000          | Chrome  | Binary  |
-| Bun      | 0.000           | 0.000          | 0.000          | Firefox | Message |
-| Bun      | 0.000           | 0.000          | 0.000          | Firefox | Binary  |
+
+| Bun      | Time (ms, avg) | Time (ms, max)  | Time (ms, min)  | Browser  | WS Type |
+|----------|-----------------|----------------|----------------|---------|---------|
+| Bun      | 0.850           | 1.200          | 0.700          | Chrome  | Message |
+| Bun      | 37.475          | 42.000         | 34.300         | Chrome  | Binary  |
+| Bun      | 2.250           | 3.000          | 1.000          | Firefox | Message |
+| Bun      | 35.750          | 39.000         | 33.000         | Firefox | Binary  |
 
 
 
