@@ -34,10 +34,17 @@ async function buildBun() {
     return;
 }
 
+async function buildPython() {
+    exec('pip install -r requirements.txt', { cwd: __dirname });
+    console.log("python-test built");
+    return;
+}
+
 async function buildAll() {
     await buildRust();
     await buildGo();
     await buildBun();
+    await buildPython();
     return;
 }
 
