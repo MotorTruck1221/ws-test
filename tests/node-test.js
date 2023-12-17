@@ -8,7 +8,7 @@ async function nodeTest() {
     for (let i = 0; i < 10; i++) {
         await page.click('#sendHello');
     }
-    await page.screenshot({path: `test-screenshots/go-chrome-basic.png`});
+    await page.screenshot({path: `test-screenshots/node-chrome-basic.png`});
     console.log('Node screenshot (chrome, basic) taken');
     await chrome.close();
 
@@ -19,7 +19,7 @@ async function nodeTest() {
     for (let i = 0; i < 10; i++) {
         await page2.click('#sendHello');
     }
-    await page2.screenshot({path: `test-screenshots/go-ff-basic.png`});
+    await page2.screenshot({path: `test-screenshots/node-ff-basic.png`});
     console.log('Node screenshot (firefox, basic) taken');
     await fox.close();
     
@@ -30,7 +30,7 @@ async function nodeTest() {
     for (let i = 0; i < 10; i++) {
         await page3.click('#sendFile');
     }
-    await page3.screenshot({path: `test-screenshots/go-chrome-binary.png`});
+    await page3.screenshot({path: `test-screenshots/node-chrome-binary.png`});
     console.log('Node screenshot (chrome, binary) taken');
     await chrome2.close();
 
@@ -41,7 +41,7 @@ async function nodeTest() {
     for (let i = 0; i < 10; i++) {
         await page4.click('#sendFile');
     }
-    await page4.screenshot({path: `test-screenshots/go-ff-binary.png`});
+    await page4.screenshot({path: `test-screenshots/node-ff-binary.png`});
     console.log('Node screenshot (firefox, binary) taken');
     await fox2.close();
 }
