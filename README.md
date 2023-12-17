@@ -1,7 +1,9 @@
 # A simple Websocket Test between Bun, Rust, Go, Node.JS and Python
 
 
-## Results (from the last 4 runs):
+## Results (from the last 4 runs, rounded to 3 decimal places):
+
+### All tests were run on a clean rebooted system with no other applications running.
 
 | Language | Time (ms, avg) | Time (ms, max) | Time (ms, min) | Browser | WS Type |
 |----------|-----------------|----------------|----------------|---------|---------|
