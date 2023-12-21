@@ -5,32 +5,41 @@
 
 ### All tests were run on a clean rebooted system with no other applications running.
 
-| Language | Time (ms, avg) | Time (ms, max) | Time (ms, min) | Browser | WS Type |
+| Bun      | Time (ms, avg)  | Time (ms, max) | Time (ms, min) | Browser | WS Type |
 |----------|-----------------|----------------|----------------|---------|---------|
-| Rust     | 0.000           | 0.000          | 0.000          | Chrome  | Message |
-| Rust     | 0.000           | 0.000          | 0.000          | Chrome  | Binary  |
-| Rust     | 0.000           | 0.000          | 0.000          | Firefox | Message |
-| Rust     | 0.000           | 0.000          | 0.000          | Firefox | Binary  |
-| Go       | 0.000           | 0.000          | 0.000          | Chrome  | Message |
-| Go       | 0.000           | 0.000          | 0.000          | Chrome  | Binary  |
-| Go       | 0.000           | 0.000          | 0.000          | Firefox | Message |
-| Go       | 0.000           | 0.000          | 0.000          | Firefox | Binary  |
-| Node.JS  | 0.000           | 0.000          | 0.000          | Chrome  | Message |
-| Node.JS  | 0.000           | 0.000          | 0.000          | Chrome  | Binary  |
-| Node.JS  | 0.000           | 0.000          | 0.000          | Firefox | Message |
-| Node.JS  | 0.000           | 0.000          | 0.000          | Firefox | Binary  |
-| Python   | 0.000           | 0.000          | 0.000          | Chrome  | Message |
-| Python   | 0.000           | 0.000          | 0.000          | Chrome  | Binary  |
-| Python   | 0.000           | 0.000          | 0.000          | Firefox | Message |
-| Python   | 0.000           | 0.000          | 0.000          | Firefox | Binary  |
+|          | 0.850           | 1.200          | 0.700          | Chrome  | Message |
+|          | 37.475          | 42.000         | 34.300         | Chrome  | Binary  |
+|          | 2.250           | 3.000          | 1.000          | Firefox | Message |
+|          | 35.750          | 39.000         | 33.000         | Firefox | Binary  |
 
-| Bun      | Time (ms, avg) | Time (ms, max)  | Time (ms, min)  | Browser  | WS Type |
+
+| Go       | Time (ms, avg)  | Time (ms, max) | Time (ms, min) | Browser | WS Type |
 |----------|-----------------|----------------|----------------|---------|---------|
-| Bun      | 0.850           | 1.200          | 0.700          | Chrome  | Message |
-| Bun      | 37.475          | 42.000         | 34.300         | Chrome  | Binary  |
-| Bun      | 2.250           | 3.000          | 1.000          | Firefox | Message |
-| Bun      | 35.750          | 39.000         | 33.000         | Firefox | Binary  |
+|          | 0.750           | 0.900          | 0.600          | Chrome  | Message |
+|          | 39.275          | 39.000         | 37.100         | Chrome  | Binary  |
+|          | 2.000           | 3.000          | 1.000          | Firefox | Message |
+|          | 36.500          | 41.000         | 33.000         | Firefox | Binary  |
 
+| Node.JS  | Time (ms, avg)  | Time (ms, max) | Time (ms, min) | Browser | WS Type |
+|----------|-----------------|----------------|----------------|---------|---------|
+|          | 1.300           | 1.500          | 1.200          | Chrome  | Message |
+|          | 37.175          | 40.800         | 35.300         | Chrome  | Binary  |
+|          | 1.750           | 2.000          | 1.000          | Firefox | Message |
+|          | 36.250          | 41.000         | 31.000         | Firefox | Binary  |
+
+| Python   | Time (ms, avg)  | Time (ms, max) | Time (ms, min) | Browser | WS Type |
+|----------|-----------------|----------------|----------------|---------|---------|
+|          | 1.300           | 1.400          | 1.200          | Chrome  | Message |
+|          | 63.250          | 65.500         | 61.300         | Chrome  | Binary  |
+|          | 2.250           | 4.000          | 1.000          | Firefox | Message |
+|          | 60.250          | 77.000         | 53.000         | Firefox | Binary  |
+
+| Rust     | Time (ms, avg)  | Time (ms, max) | Time (ms, min) | Browser | WS Type |
+|----------|-----------------|----------------|----------------|---------|---------|
+|          | 0.725           | 0.600          | 0.800          | Chrome  | Message |
+|          | 36.050          | 39.000         | 32.200         | Chrome  | Binary  |
+|          | 2.000           | 3.000          | 1.000          | Firefox | Message |
+|          | 36.000          | 39.000         | 33.000          | Firefox | Binary  |
 
 
 ## Local Testing:
