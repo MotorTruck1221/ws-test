@@ -39,7 +39,50 @@
 |          | 0.725           | 0.600          | 0.800          | Chrome  | Message |
 |          | 36.050          | 39.000         | 32.200         | Chrome  | Binary  |
 |          | 2.000           | 3.000          | 1.000          | Firefox | Message |
-|          | 36.000          | 39.000         | 33.000          | Firefox | Binary  |
+|          | 36.000          | 39.000         | 33.000         | Firefox | Binary  |
+
+---
+
+# Final Rankings (based on average time):
+
+## Rank for basic message sending (chrome):
+
+| Rank | Language |
+|------|----------|
+| 1    | Rust     |
+| 2    | Go       |
+| 3    | Node.JS  |
+| 3    | Python   |
+
+## Rank for binary message sending (chrome):
+
+| Rank | Language |
+|------|----------|
+| 1    | Rust     |
+| 2    | Node.JS  |
+| 3    | Bun      |
+| 4    | Go       |
+| 5    | Python   |
+
+## Rank for basic message sending (firefox):
+
+| Rank | Language |
+|------|----------|
+| 1    | Node.JS  |
+| 2    | Rust     |
+| 2 (tie w/rust) | Go    |
+| 3    | Python   |
+| 3 (tie w/python) | Bun |
+
+## Rank for binary message sending (firefox):
+
+| Rank | Language |
+|------|----------|
+| 1    | Bun      |
+| 2    | Rust     |
+| 3    | Node.JS  |
+| 4    | Go       |
+| 5    | Python   |
 
 
 ## Local Testing:
